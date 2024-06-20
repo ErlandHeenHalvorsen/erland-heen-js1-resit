@@ -1,0 +1,11 @@
+GET https://v2.api.noroff.dev/jokes
+
+
+#######
+
+
+ GET https://v2.api.noroff.dev/jokes/random
+
+#######
+
+ GET https://v2.api.noroff.dev/jokes/1

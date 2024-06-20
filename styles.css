@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+body {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+}
+main {
+  display: flex;
+}
+#joke-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 50px 50px;
+}
+.mainCol {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  width: 400px;
+  margin: 10px 20px;
+  height: 150px;
+  min-height: fit-content;
+  justify-content: space-around;
+}
