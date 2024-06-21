@@ -7,6 +7,7 @@ body {
   display: flex;
   justify-content: space-around;
   flex-direction: column;
+  margin: 5px 20px;
 }
 header {
   display: flex;
@@ -14,12 +15,17 @@ header {
 }
 main {
   display: flex;
+  flex-direction: column;
+}
+#filter {
+  margin: 20px 0;
+  width: 200px;
 }
 #joke-container {
   display: flex;
-  width: 100%;
   flex-wrap: wrap;
-  margin: 50px 50px;
+  justify-content: center;
+  margin: 20px 0;
 }
 .mainCol {
   display: flex;
@@ -30,4 +36,5 @@ main {
   height: 150px;
   min-height: fit-content;
   justify-content: space-around;
+  border-radius: 8px;
 }
