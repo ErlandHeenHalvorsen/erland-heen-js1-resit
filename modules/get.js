@@ -1,13 +1,16 @@
-let jokes = [];
-async function getJokes() {
-  const response = await fetch("https://v2.api.noroff.dev/jokes");
-  let res = await response.json();
-  if (!response.ok) {
-    throw new Error(res.status);
-  }
-  jokes = res.data;
-  dislpayJokes(jokes);
-}
+import { getJokes } from "./api.js";
+import { buttonEventListeners } from "./listener.js";
+
+let jokes;
+// async function getJokes() {
+//   const response = await fetch("https://v2.api.noroff.dev/jokes");
+//   let res = await response.json();
+//   if (!response.ok) {
+//     throw new Error(res.status);
+//   }
+//   jokes = res.data;
+//   dislpayJokes(jokes);
+// }
 
 function dislpayJokes(jokesToDisplay) {
   let html = "";
@@ -23,15 +26,7 @@ function dislpayJokes(jokesToDisplay) {
     `;
   });
   document.getElementById("joke-container").innerHTML = html;
-  addEventListeners();
-}
-
-function addEventListeners() {
-  jokes.forEach((joke) => {
-    document.getElementById(joke.id).addEventListener("click", () => {
-      document.getElementById(`punchline-${joke.id}`).style.display = "block";
-    });
-  });
+  buttonEventListeners(jokesToDisplay);
 }
 
 function filterJokes() {
@@ -43,7 +38,10 @@ function filterJokes() {
     dislpayJokes(filteredJokes);
   }
 }
+async function renderJokes() {
+  jokes = await getJokes();
+  dislpayJokes(jokes);
+}
+renderJokes();
 
 document.getElementById("filter").addEventListener("change", filterJokes);
-
-getJokes();

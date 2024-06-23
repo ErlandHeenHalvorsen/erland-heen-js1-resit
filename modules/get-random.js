@@ -1,13 +1,28 @@
-async function fetchRandomJoke() {
-  const response = await fetch("https://v2.api.noroff.dev/jokes/random");
-  let res = await response.json();
-  if (!response.ok) {
-    throw new Error(res.status);
-  }
-  let randomJoke = res.data;
-  const button = document.querySelector(".btn-random");
-  button.addEventListener("click", () => {
-    console.log(randomJoke);
-  });
+import { buttonEventListeners } from "./listener.js";
+import { getJokes, getRandomJoke } from "./api.js";
+
+function displayRandomJoke(randomJoke) {
+  let html = "";
+  html += `
+  <div class="mainCol">
+  <h3>${randomJoke.id}</h3>
+  <p>Type of Joke:${randomJoke.type}</p>
+  <p>${randomJoke.setup}</p>
+  <button class="btn" id="${randomJoke.id}" data-id="${randomJoke.id}">Get Punchline</button>
+  <p class="punchline" id="punchline-${randomJoke.id}" style="display: none">${randomJoke.punchline}</p>
+  </div>
+  `;
+  document.getElementById("random-joke-container").innerHTML = html;
 }
-fetchRandomJoke();
+
+const button = document.querySelector(".btn-random");
+
+button.addEventListener("click", async () => {
+  try {
+    let randomJoke = await getRandomJoke();
+    displayRandomJoke(randomJoke);
+    buttonEventListeners([randomJoke]);
+  } catch (error) {
+    console.error("Error fetching random joke:", error);
+  }
+});
